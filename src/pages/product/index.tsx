@@ -1,18 +1,33 @@
 import { useQuery } from "@tanstack/react-query";
+import ProductItem from "../../components/products/item";
 import { fetcher, QueryKeys } from "../../queryClient";
+import { TypeProduct } from "../../types";
 
 function ProductList() {
-  const { data } = useQuery({
+  const { data } = useQuery<TypeProduct[]>({
     queryKey: [QueryKeys.PRODUCTS], 
-    queryFn: ()=> fetcher({
+    queryFn: () => fetcher({
         method: 'GET',
         path: '/products'
       })
   })
-  console.log(data);
-  
+  /*
+    id:1,
+    title:'...',
+    price:'...',
+    category:'...',
+    description:'...',
+    image:'...'
+  */
+
   return (
-    <div>ProductList</div>
+    <div>
+      <ul>
+        {data?.map(product=>(
+          <ProductItem {...product} key={product.id} />
+        ))}
+      </ul>
+    </div>
   );
 }
 
