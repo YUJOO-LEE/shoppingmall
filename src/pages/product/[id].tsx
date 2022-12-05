@@ -7,7 +7,7 @@ import { TypeProduct } from "../../types";
 function ProductDetailPage() {
   const { id } = useParams();
   const { data } = useQuery<TypeProduct>({
-    queryKey: [QueryKeys.PRODUCTS], 
+    queryKey: [QueryKeys.PRODUCTS, id], 
     queryFn: () => fetcher({
         method: 'GET',
         path: `/products/${id}`,
