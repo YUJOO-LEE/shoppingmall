@@ -2,7 +2,6 @@ import { TypeProduct } from "../../types";
 
 function ProductItem({
   category,
-  description,
   id,
   image,
   price,
@@ -10,13 +9,12 @@ function ProductItem({
   title,
 }: TypeProduct) {
   return (
-    <li>
-      <p>{category}</p>
-      <p>{title}</p>
-      <p>{description}</p>
-      <img src={image} alt={title} />
-      <span>${price}</span>
-      <span>{rating.rate}</span>
+    <li className="product-item">
+      <p className="product-item__category">{category}</p>
+      <p className="product-item__title">{title}</p>
+      <img className="product-item__image" src={image} alt={title} />
+      <span className="product-item__price">${price}</span>
+      <span className="product-item__rating">{rating.rate}</span>
     </li>
   )
 }
