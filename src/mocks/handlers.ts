@@ -1,5 +1,4 @@
 import { graphql } from 'msw';
-import { v4 as uuid } from 'uuid';
 import GET_PRODUCTS, { GET_PRODUCT } from '../graphql/products';
 
 const mockProducts = (() =>
