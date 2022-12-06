@@ -1,10 +1,7 @@
-import {
-  QueryClient,
-} from '@tanstack/react-query';
+import { QueryClient } from '@tanstack/react-query';
+import { request, RequestDocument } from 'graphql-request';
 
-const BASE_URL = 'https://fakestoreapi.com';
-type TypeMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
-type TypeBodyOBJ = { [key: string]: any };
+const BASE_URL = '/';
 
 // Create a client
 export const getClient = (()=>{
@@ -25,43 +22,47 @@ export const getClient = (()=>{
   }
 })();
 
-export const fetcher = async ({
-  method,
-  path,
-  body,
-  params,
-}: {
-  method: TypeMethod;
-  path: string;
-  body?: TypeBodyOBJ;
-  params?: TypeBodyOBJ;
-}) => {
-  try {
-    let url = `${BASE_URL}${path}`;
-    const fetchOptions: RequestInit = {
-      method,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': BASE_URL
-      }
-    }
+// type TypeMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
+// type TypeBodyOBJ = { [key: string]: any };
+// export const restFetcher = async ({
+//   method,
+//   path,
+//   body,
+//   params,
+// }: {
+//   method: TypeMethod;
+//   path: string;
+//   body?: TypeBodyOBJ;
+//   params?: TypeBodyOBJ;
+// }) => {
+//   try {
+//     let url = `${BASE_URL}${path}`;
+//     const fetchOptions: RequestInit = {
+//       method,
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'Access-Control-Allow-Origin': BASE_URL
+//       }
+//     }
 
-    if (params) {
-      const searchParams = new URLSearchParams(params);
-      url += '?' + searchParams.toString();
-    }
+//     if (params) {
+//       const searchParams = new URLSearchParams(params);
+//       url += '?' + searchParams.toString();
+//     }
 
-    if (body) {
-      fetchOptions.body = JSON.stringify(body);
-    }
+//     if (body) {
+//       fetchOptions.body = JSON.stringify(body);
+//     }
 
-    const res = await fetch(url, fetchOptions);
-    const json = await res.json();
-    return json;
-  } catch(err) {
-    console.error(err);
-  }
-}
+//     const res = await fetch(url, fetchOptions);
+//     const json = await res.json();
+//     return json;
+//   } catch(err) {
+//     console.error(err);
+//   }
+// }
+
+export const graphqlFetcher = (query: RequestDocument, variables = {}) => request(BASE_URL, query, variables);
 
 export const QueryKeys = {
   PRODUCTS: 'PRODUCTS',

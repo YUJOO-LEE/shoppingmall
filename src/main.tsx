@@ -3,6 +3,11 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import './scss/index.scss';
 import App from './_app';
+import { worker } from './mocks/browser';
+
+if (import.meta.env.DEV) {
+  worker.start();
+}
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
@@ -10,4 +15,4 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <App />
     </BrowserRouter>
   </React.StrictMode>
-)
+);
