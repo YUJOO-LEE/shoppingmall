@@ -50,6 +50,7 @@ const CartItem = ({
 
   const handleUpdateAmount = (e: SyntheticEvent) => {
     const amount = Number((e.target as HTMLInputElement).value);
+    if (amount < 1) return;
     updateCart({id, amount});
   }
 
