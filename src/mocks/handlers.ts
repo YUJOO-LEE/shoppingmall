@@ -1,5 +1,5 @@
 import { graphql } from 'msw';
-import { GET_CART, ADD_CART, TypeCart, UPDATE_CART } from '../graphql/cart';
+import { GET_CART, ADD_CART, TypeCart, UPDATE_CART, DELETE_CART } from '../graphql/cart';
 import GET_PRODUCTS, { GET_PRODUCT } from '../graphql/products';
 
 const mockProducts = (() =>
@@ -65,5 +65,13 @@ export const handlers = [
     newCartData[id] = newItem;
     cartData = newCartData;
     return res(ctx.data(newItem));
+  }),
+  graphql.mutation(DELETE_CART, (req, res, ctx) => {
+    const newCartData = { ...cartData };
+    const id = req.variables.id;
+
+    delete newCartData[id];
+    cartData = newCartData;
+    return res(ctx.data(id));
   }),
 ]

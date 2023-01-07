@@ -43,3 +43,11 @@ export const GET_CART = gql`
     }
   }
 `;
+
+export const DELETE_CART = gql`
+  mutation DELETE_CART($id: string) {
+    cart(id: $id) {
+      id
+    }
+  }
+`;
