@@ -30,7 +30,7 @@ const CartItem = ({
 
         const newCart = {
           ...(prevCart || {}),
-          ...newValue,
+          [id]: newValue,
         };
         queryClient.setQueryData([QueryKeys.CART], newCart);
       }
@@ -43,7 +43,7 @@ const CartItem = ({
 
   return (
     <li>
-      <img src={imageUrl} alt={title} />
+      <img className="cart-item__image" src={imageUrl} alt={title} />
       <p className="cart-item__price">{id}</p>
       <p className="cart-item__title">{title}</p>
       <p className="cart-item__price">{price}</p>
