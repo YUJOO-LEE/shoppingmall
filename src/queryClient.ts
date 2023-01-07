@@ -22,48 +22,9 @@ export const getClient = (()=>{
   }
 })();
 
-// type TypeMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
-// type TypeBodyOBJ = { [key: string]: any };
-// export const restFetcher = async ({
-//   method,
-//   path,
-//   body,
-//   params,
-// }: {
-//   method: TypeMethod;
-//   path: string;
-//   body?: TypeBodyOBJ;
-//   params?: TypeBodyOBJ;
-// }) => {
-//   try {
-//     let url = `${BASE_URL}${path}`;
-//     const fetchOptions: RequestInit = {
-//       method,
-//       headers: {
-//         'Content-Type': 'application/json',
-//         'Access-Control-Allow-Origin': BASE_URL
-//       }
-//     }
-
-//     if (params) {
-//       const searchParams = new URLSearchParams(params);
-//       url += '?' + searchParams.toString();
-//     }
-
-//     if (body) {
-//       fetchOptions.body = JSON.stringify(body);
-//     }
-
-//     const res = await fetch(url, fetchOptions);
-//     const json = await res.json();
-//     return json;
-//   } catch(err) {
-//     console.error(err);
-//   }
-// }
-
 export const graphqlFetcher = (query: RequestDocument, variables = {}) => request(BASE_URL, query, variables);
 
 export const QueryKeys = {
   PRODUCTS: 'PRODUCTS',
+  CART: 'CART',
 }

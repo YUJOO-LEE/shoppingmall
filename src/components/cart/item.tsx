@@ -1,0 +1,21 @@
+import { TypeCart } from "../../graphql/cart";
+
+const CartItem = ({
+  id,
+  imageUrl,
+  price,
+  title,
+  amount
+}: TypeCart) => {
+  return (
+    <li>
+      {id} 
+      {imageUrl} 
+      {price} 
+      {title}
+      {amount}
+    </li>
+  )
+}
+
+export default CartItem;
