@@ -3,7 +3,7 @@ import CartItem from "./item";
 
 const CartList = ({ cartItems }: {cartItems: TypeCart[]}) => {
   return (
-    <ul>
+    <ul className="cart">
       {cartItems.map(item => 
         <CartItem {...item} key={item.id} />
       )}

@@ -42,9 +42,9 @@ const CartItem = ({
   }
 
   return (
-    <li>
+    <li className="cart-item">
       <img className="cart-item__image" src={imageUrl} alt={title} />
-      <p className="cart-item__price">{id}</p>
+      <p className="cart-item__id">{id}</p>
       <p className="cart-item__title">{title}</p>
       <p className="cart-item__price">{price}</p>
       <input type="number" className="cart-item__amount" value={amount}
