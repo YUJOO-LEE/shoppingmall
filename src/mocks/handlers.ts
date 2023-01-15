@@ -1,5 +1,6 @@
 import { graphql } from 'msw';
 import { GET_CART, ADD_CART, TypeCart, UPDATE_CART, DELETE_CART } from '../graphql/cart';
+import { EXECUTE_PAY } from '../graphql/payment';
 import GET_PRODUCTS, { GET_PRODUCT } from '../graphql/products';
 
 const mockProducts = (() =>
@@ -66,12 +67,14 @@ export const handlers = [
     cartData = newCartData;
     return res(ctx.data(newItem));
   }),
-  graphql.mutation(DELETE_CART, (req, res, ctx) => {
+  graphql.mutation(DELETE_CART, ({ variables: { id } }, res, ctx) => {
     const newCartData = { ...cartData };
-    const id = req.variables.id;
-
     delete newCartData[id];
     cartData = newCartData;
     return res(ctx.data(id));
+  }),
+  graphql.mutation(EXECUTE_PAY, ({ variables }, res, ctx) => {
+    console.log(variables);
+    return res();
   }),
 ]
