@@ -1,23 +1,23 @@
-import { useNavigate } from "react-router-dom";
+import { SyntheticEvent } from "react";
 import { useRecoilValue } from "recoil"
 import { checkedCartState } from "../../recoils/cart"
 import ItemData from "../cart/itemData";
 
 
-const WillPay = () => {
+const WillPay = ({
+  handleSubmit,
+  submitTitle,
+}: {
+  handleSubmit: (e: SyntheticEvent) => void;
+  submitTitle: string;
+}) => {
 
-  const navigate = useNavigate();
   const checkedItems = useRecoilValue(checkedCartState);
 
   const totalPrice = checkedItems.reduce((res, { price, amount }) => {
     res += price * amount;
     return res;
   }, 0);
-
-  const handleSubmit = () => {
-    if (!checkedItems.length) return alert('결제할 아이템이 없습니다.');
-    navigate('/payment');
-  }
 
   return (
     <div className="willpay">
@@ -30,7 +30,7 @@ const WillPay = () => {
           </li>)}
       </ul>
       <p className="willpay__total">총 예상 결제금액 : {totalPrice}</p>
-      <button onClick={handleSubmit}>결제하기</button>
+      <button onClick={handleSubmit}>{submitTitle}</button>
     </div>
   )
 }

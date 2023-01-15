@@ -1,7 +1,9 @@
-function Payment() {
+import Payment from "../../components/payment";
+
+function PaymentPage() {
   return (
-    <div>index</div>
+    <Payment />
   )
 }
 
-export default Payment;
+export default PaymentPage;

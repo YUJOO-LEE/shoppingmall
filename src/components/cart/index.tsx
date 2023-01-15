@@ -1,4 +1,5 @@
 import { createRef, SyntheticEvent, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { TypeCart } from "../../graphql/cart";
 import { checkedCartState } from "../../recoils/cart";
@@ -7,6 +8,7 @@ import CartItem from "./item";
 
 const CartList = ({ cartItems }: {cartItems: TypeCart[]}) => {
 
+  const navigate = useNavigate();
   const [checkedCartData, setCheckedCartData] = useRecoilState(checkedCartState);
   const formRef = useRef<HTMLFormElement>(null);
   const checkboxRefs = cartItems.map(() => createRef<HTMLInputElement>());
@@ -19,7 +21,6 @@ const CartList = ({ cartItems }: {cartItems: TypeCart[]}) => {
     const allChecked = (selectedCount === cartItems.length);
     formRef.current.querySelector<HTMLInputElement>('.select-all')!.checked = allChecked;
   }
-
   const setItemscheckedFromAll = (targetInput: HTMLInputElement) => {
     const allChecked = targetInput.checked;
     checkboxRefs.forEach((inputElem) => {
@@ -36,9 +37,14 @@ const CartList = ({ cartItems }: {cartItems: TypeCart[]}) => {
     } else {
       setAllCheckedFromItems();
     }
-    
+
     const data = new FormData(formRef.current);
     setFormData(data);
+  }
+
+  const handleSubmit = () => {
+    if (!checkedCartData.length) return alert('결제할 아이템이 없습니다.');
+    navigate('/payment');
   }
 
   useEffect(() => {
@@ -70,7 +76,7 @@ const CartList = ({ cartItems }: {cartItems: TypeCart[]}) => {
           )}
         </ul>
       </form>
-      <WillPay />
+      <WillPay handleSubmit={handleSubmit} submitTitle='구매하기' />
     </div>
   )
 }
