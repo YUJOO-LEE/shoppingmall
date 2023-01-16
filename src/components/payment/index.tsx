@@ -8,17 +8,14 @@ import { checkedCartState } from "../../recoils/cart";
 import WillPay from "../willPay";
 import PaymentModal from "./modal";
 
-type TypePayInfo = {
-  id: string;
-  amount: number;
-}
+type TypePayInfos = string[];
 
 const Payment = () => {
   const navigator = useNavigate();
   const [checkedCartData, setCheckedCartData] = useRecoilState(checkedCartState);
   const [modalShown, toggleModal] = useState(false);
   const { mutate: executePay } = useMutation(
-    (payInfos: TypePayInfo[]) => graphqlFetcher(EXECUTE_PAY, payInfos)
+    (payInfos: TypePayInfos) => graphqlFetcher(EXECUTE_PAY, payInfos)
   );
 
   const showModal = () => {
@@ -26,7 +23,7 @@ const Payment = () => {
   }
 
   const proceed = () => {
-    const payInfos = checkedCartData.map(({ id, amount }) => ({ id, amount }));
+    const payInfos = checkedCartData.map(({ id }) => (id));
 
     executePay(payInfos);
     setCheckedCartData([]);
