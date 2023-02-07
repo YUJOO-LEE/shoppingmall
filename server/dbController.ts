@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { resolve } from 'path';
 
-enum DBField {
+export enum DBField {
   CART = 'cart',
   PRODUCTS = 'products',
 }
