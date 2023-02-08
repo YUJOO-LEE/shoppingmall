@@ -1,4 +1,4 @@
-import { DBField, writeDB } from '../../dbController';
+import { DBField, writeDB } from '../dbController';
 import { Resolver, TypeCart } from './types';
 
 const setJSON = (data: TypeCart) => 
@@ -6,7 +6,7 @@ const setJSON = (data: TypeCart) =>
 
 const cartResolver: Resolver = {
   Query: {
-    products: (parent, args, { db }, info) => {
+    cart: (parent, args, { db }, info) => {
       return db.cart;
     },
   },

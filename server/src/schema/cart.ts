@@ -1,17 +1,17 @@
 import { gql } from 'apollo-server-express';
 
 const cartSchema = gql`
-  type TypeCartItem {
+  type CartItem {
     id: ID!
     amount: Int!
-    product: TypeProduct!
+    product: Product!
   }
   extend type Query {
-    cart: [TypeCartItem!]
+    cart: [CartItem!]
   }
   extend type Mutation {
-    addCart(id: ID!): TypeCartItem!
-    updateCart(id: ID!, amount: Int!): TypeCartItem!
+    addCart(id: ID!): CartItem!
+    updateCart(id: ID!, amount: Int!): CartItem!
     deleteCart(id: ID!): ID!
     executePay(ids: [ID!]): [ID!]
   }

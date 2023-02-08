@@ -1,7 +1,7 @@
 import { QueryClient } from '@tanstack/react-query';
 import { request, RequestDocument } from 'graphql-request';
 
-const BASE_URL = '/';
+const BASE_URL = 'http://localhost:8000/graphql';
 
 // Create a client
 export const getClient = (()=>{
