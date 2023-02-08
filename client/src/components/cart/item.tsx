@@ -42,7 +42,7 @@ const CartItem = ({
     );
 
   const { mutate: deleteCart } = useMutation(
-    (id: string) => graphqlFetcher(DELETE_CART, { id }),
+    ({ id }: { id: string }) => graphqlFetcher(DELETE_CART, { id }),
     {
       onSuccess: () => {
         queryClient.invalidateQueries([QueryKeys.CART]);
@@ -53,11 +53,11 @@ const CartItem = ({
   const handleUpdateAmount = (e: SyntheticEvent) => {
     const amount = Number((e.target as HTMLInputElement).value);
     if (amount < 1) return;
-    updateCart({id, amount});
+    updateCart({ id, amount });
   }
 
   const handleDeleteItem = () => {
-    deleteCart(id);
+    deleteCart({ id });
   }
 
   return (
