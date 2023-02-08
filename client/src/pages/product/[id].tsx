@@ -6,7 +6,7 @@ import { graphqlFetcher, QueryKeys } from "../../queryClient";
 
 function ProductDetailPage() {
   const { id } = useParams();
-  const { data } = useQuery<TypeProduct>({
+  const { data } = useQuery<{product: TypeProduct}>({
     queryKey: [QueryKeys.PRODUCTS, id], 
     queryFn: () => graphqlFetcher(GET_PRODUCT, { id })
   })
@@ -15,7 +15,7 @@ function ProductDetailPage() {
     <>
       <h2>상품 상세</h2>
       {data && 
-        <ProductDetail data={data} />
+        <ProductDetail data={data.product} />
       }
     </>
   )

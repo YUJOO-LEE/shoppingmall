@@ -7,40 +7,6 @@ export type TypeCart = {
   product: TypeProduct;
 }
 
-export const ADD_CART = gql`
-  mutation ADD_CART($id: ID!) {
-    cart(id: $id) {
-      id
-      amount
-      product {
-        id
-        imageUrl
-        price
-        title
-        description
-        createdAt
-      }
-    }
-  }
-`;
-
-export const UPDATE_CART = gql`
-  mutation UPDATE_CART($id: ID!, $amount: Int!) {
-    cart(id: $id, amount: $amount) {
-      id
-      amount
-      product {
-        id
-        imageUrl
-        price
-        title
-        description
-        createdAt
-      }
-    }
-  }
-`;
-
 export const GET_CART = gql`
   query GET_CART {
     cart {
@@ -58,9 +24,43 @@ export const GET_CART = gql`
   }
 `;
 
+export const ADD_CART = gql`
+  mutation ADD_CART($id: ID!) {
+    addCart(id: $id) {
+      id
+      amount
+      product {
+        id
+        imageUrl
+        price
+        title
+        description
+        createdAt
+      }
+    }
+  }
+`;
+
+export const UPDATE_CART = gql`
+  mutation UPDATE_CART($id: ID!, $amount: Int!) {
+    updateCart(id: $id, amount: $amount) {
+      id
+      amount
+      product {
+        id
+        imageUrl
+        price
+        title
+        description
+        createdAt
+      }
+    }
+  }
+`;
+
 export const DELETE_CART = gql`
   mutation DELETE_CART($id: ID!) {
-    cart(id: $id) {
+    deleteCart {
       id
     }
   }

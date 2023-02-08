@@ -11,7 +11,7 @@ function CartPage() {
     }
   )
 
-  const cartItems = Object.values(data || {}) as TypeCart[];
+  const cartItems = (data?.cart || []) as TypeCart[];
   if (!cartItems.length) return <div>장바구니가 비었어요</div>
 
   return (
