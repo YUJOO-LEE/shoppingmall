@@ -1,12 +1,16 @@
-import ProductItem from "../../components/products/item";
-import { TypeProduct } from "../../graphql/products";
+import ProductItem from '../../components/products/item';
+import { TypeProduct } from '../../graphql/products';
 
-const ProductsList = ({ list }: { list: TypeProduct[] }) => {
+const ProductsList = ({ 
+  list,
+}: { 
+  list: { products: TypeProduct[] }[] 
+}) => {
 
   return (
-    <ul className="products">
-      {list.map(product=>(
-        <ProductItem {...product} key={product.id} />
+    <ul className='products'>
+      {list.map(page => page.products.map(
+        product => <ProductItem {...product} key={product.id} />
       ))}
     </ul>
   )
