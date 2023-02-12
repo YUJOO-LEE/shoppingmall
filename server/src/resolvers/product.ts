@@ -7,9 +7,10 @@ const setJSON = (data: TypeProducts) =>
 
 const productResolver: Resolver = {
   Query: {
-    products: (parent, { cursor = '' }, { db }, info) => {
-      const fromIndex = db.products.findIndex(product => product.id === cursor) + 1;
-      return db.products.slice(fromIndex, fromIndex + 16) || [];
+    products: (parent, { cursor = '', showDeleted = false }, { db }, info) => {
+      const filteredDB = showDeleted ?db.products : db.products.filter(product => !! product.createdAt);
+      const fromIndex = filteredDB.findIndex(product => product.id === cursor) + 1;
+      return filteredDB.slice(fromIndex, fromIndex + 20) || [];
     },
     product: (parent, { id }, { db }, info) => {
       const found = db.products.find(item => item.id === id);
