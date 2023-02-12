@@ -20,7 +20,7 @@ export type TypeProduct = {
   price: number;
   title: string;
   description: string;
-  createdAt: number;
+  createdAt?: number;
 }
 
 export type TypeProducts = TypeProduct[];
